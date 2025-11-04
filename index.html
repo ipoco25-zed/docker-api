@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Calculator</title>
+</head>
+<body>
+  <h1>Mini Calculator</h1>
+
+  <input type="number" id="num1" placeholder="Number 1">
+  <input type="number" id="num2" placeholder="Number 2"><br><br>
+
+  <button onclick="calculate('sum')">Add</button>
+  <button onclick="calculate('subtract')">Subtract</button>
+  <button onclick="calculate('multiply')">Multiply</button>
+  <button onclick="calculate('divide')">Divide</button>
+
+  <h2>Result: <span id="result"></span></h2>
+
+  <script>
+    const apiBase = "https://docker-api-oc5t.onrender.com"; // change if needed
+
+    async function calculate(op) {
+      const a = document.getElementById("num1").value;
+      const b = document.getElementById("num2").value;
+
+      // GET request with query parameters
+      const response = await fetch(`${apiBase}/${op}?a=${a}&b=${b}`);
+      const data = await response.json();
+
+      if (data.result !== undefined) {
+        document.getElementById("result").textContent = data.result;
+      } else if (data.error) {
+        document.getElementById("result").textContent = "Error: " + data.error;
+      }
+    }
+  </script>
+</body>
+</html>
