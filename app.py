@@ -27,5 +27,43 @@ def sum_numbers():
 
     return jsonify({"result": a + b})
 
+@app.route("/subtract", methods=["GET","POST"])
+def subtract_numbers():
+    if request.method == "POST":
+        data = request.get_json()
+        a = data.get("a")
+        b = data.get("b")
+    else:
+        a = request.args.get("a", type=int)
+        b = request.args.get("b", type=int)
+
+    return jsonify({"result": a - b})
+
+@app.route("/multiply", methods=["GET","POST"])
+def mult_numbers():
+    if request.method == "POST":
+        data = request.get_json()
+        a = data.get("a")
+        b = data.get("b")
+    else:
+        a = request.args.get("a", type=int)
+        b = request.args.get("b", type=int)
+
+    return jsonify({"result": a * b})
+
+@app.route("/divide", methods=["GET","POST"])
+def div_numbers():
+    if request.method == "POST":
+        data = request.get_json()
+        a = data.get("a")
+        b = data.get("b")
+    else:
+        a = request.args.get("a", type=int)
+        b = request.args.get("b", type=int)
+
+    return jsonify({"result": a / b})
+
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
