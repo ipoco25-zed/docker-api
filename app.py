@@ -15,7 +15,7 @@ def hello(name):
         "message": f"Hello, {name} 😎"
     })
 
-@app.route("/sum", methods=["POST"])
+@app.route("/sum", methods=["GET","POST"])
 def sum_numbers():
     if request.method == "POST":
         data = request.get_json()
