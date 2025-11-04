@@ -17,12 +17,16 @@ def hello(name):
 
 @app.route("/sum", methods=["POST"])
 def sum_numbers():
-    data = request.get_json()
-    a = data.get("a")
-    b = data.get("b")
-    return jsonify({
-        "result": a + b
-    })
+def sum_numbers():
+    if request.method == "POST":
+        data = request.get_json()
+        a = data.get("a")
+        b = data.get("b")
+    else:
+        a = request.args.get("a", type=int)
+        b = request.args.get("b", type=int)
+
+    return jsonify({"result": a + b})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
